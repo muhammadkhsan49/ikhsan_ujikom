@@ -22,13 +22,13 @@
                         <div class="mb-3">
                             <label class="form-label">Judul *</label>
                             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                                   value="{{ old('title', $schedule->title ?? '') }}" required>
+                                value="{{ old('title', optional($schedule)->title ?? '') }}" required>
                             @error('title') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Deskripsi</label>
-                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="3">{{ old('description', $schedule->description ?? '') }}</textarea>
+                            <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="3">{{ old('description', optional($schedule)->description ?? '') }}</textarea>
                             @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
 
@@ -37,19 +37,19 @@
                                 <label class="form-label">Tahap *</label>
                                 <select name="stage" class="form-select @error('stage') is-invalid @enderror" required>
                                     <option value="">-- Pilih Tahap --</option>
-                                    <option value="registrasi" {{ (old('stage') ?? $schedule->stage ?? '') === 'registrasi' ? 'selected' : '' }}>Pendaftaran</option>
-                                    <option value="tes_kesehatan" {{ (old('stage') ?? $schedule->stage ?? '') === 'tes_kesehatan' ? 'selected' : '' }}>Tes Kesehatan</option>
-                                    <option value="tes_fisik" {{ (old('stage') ?? $schedule->stage ?? '') === 'tes_fisik' ? 'selected' : '' }}>Tes Fisik</option>
-                                    <option value="tes_psikologi" {{ (old('stage') ?? $schedule->stage ?? '') === 'tes_psikologi' ? 'selected' : '' }}>Tes Psikologi</option>
-                                    <option value="wawancara" {{ (old('stage') ?? $schedule->stage ?? '') === 'wawancara' ? 'selected' : '' }}>Wawancara</option>
-                                    <option value="hasil_akhir" {{ (old('stage') ?? $schedule->stage ?? '') === 'hasil_akhir' ? 'selected' : '' }}>Hasil Akhir</option>
+                                    <option value="registrasi" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'registrasi' ? 'selected' : '' }}>Pendaftaran</option>
+                                    <option value="tes_kesehatan" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'tes_kesehatan' ? 'selected' : '' }}>Tes Kesehatan</option>
+                                    <option value="tes_fisik" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'tes_fisik' ? 'selected' : '' }}>Tes Fisik</option>
+                                    <option value="tes_psikologi" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'tes_psikologi' ? 'selected' : '' }}>Tes Psikologi</option>
+                                    <option value="wawancara" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'wawancara' ? 'selected' : '' }}>Wawancara</option>
+                                    <option value="hasil_akhir" {{ (old('stage') ?? optional($schedule)->stage ?? '') === 'hasil_akhir' ? 'selected' : '' }}>Hasil Akhir</option>
                                 </select>
                                 @error('stage') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Kuota (Opsional)</label>
-                                <input type="number" name="quota" class="form-control @error('quota') is-invalid @enderror"
-                                       value="{{ old('quota', $schedule->quota ?? '') }}" min="1">
+                                    <input type="number" name="quota" class="form-control @error('quota') is-invalid @enderror"
+                                        value="{{ old('quota', optional($schedule)->quota ?? '') }}" min="1">
                                 @error('quota') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
@@ -57,21 +57,21 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Tanggal Mulai *</label>
-                                <input type="datetime-local" name="start_date" class="form-control @error('start_date') is-invalid @enderror"
-                                       value="{{ old('start_date', $schedule->start_date ? $schedule->start_date->format('Y-m-d\TH:i') : '') }}" required>
+                                    <input type="datetime-local" name="start_date" class="form-control @error('start_date') is-invalid @enderror"
+                                        value="{{ old('start_date', optional(optional($schedule)->start_date)->format('Y-m-d\\TH:i') ?? '') }}" required>
                                 @error('start_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Tanggal Selesai *</label>
-                                <input type="datetime-local" name="end_date" class="form-control @error('end_date') is-invalid @enderror"
-                                       value="{{ old('end_date', $schedule->end_date ? $schedule->end_date->format('Y-m-d\TH:i') : '') }}" required>
+                                    <input type="datetime-local" name="end_date" class="form-control @error('end_date') is-invalid @enderror"
+                                        value="{{ old('end_date', optional(optional($schedule)->end_date)->format('Y-m-d\\TH:i') ?? '') }}" required>
                                 @error('end_date') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Lokasi</label>
-                            <textarea name="location" class="form-control @error('location') is-invalid @enderror" rows="2">{{ old('location', $schedule->location ?? '') }}</textarea>
+                            <textarea name="location" class="form-control @error('location') is-invalid @enderror" rows="2">{{ old('location', optional($schedule)->location ?? '') }}</textarea>
                             @error('location') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
 
