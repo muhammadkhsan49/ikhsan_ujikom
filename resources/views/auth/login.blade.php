@@ -42,18 +42,18 @@
                         <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
                     </form>
 
-                    <p class="text-center text-muted mb-0">
-                        Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a>
+                    <p class="text-center" style="color: #9ca3af; margin-bottom: 0;">
+                        Belum punya akun? <a href="{{ route('register') }}" style="color: #fbbf24; text-decoration: none;">Daftar di sini</a>
                     </p>
                 </div>
             </div>
 
-            <div class="mt-4 p-3 bg-light rounded">
-                <h6><i class="bi bi-info-circle"></i> Demo Account</h6>
+            <div class="mt-4 p-3 rounded" style="background-color: #1a1a1a; border: 1px solid #404040; color: #d1d5db;">
+                <h6 style="color: #fbbf24;"><i class="bi bi-info-circle"></i> Demo Account</h6>
                 <p class="small mb-1"><strong>User:</strong></p>
-                <p class="small mb-2">Email: user@example.com | Password: password</p>
+                <p class="small mb-2">Email: john@example.com | Password: password123</p>
                 <p class="small mb-1"><strong>Admin:</strong></p>
-                <p class="small mb-0">Email: admin@example.com | Password: password</p>
+                <p class="small mb-0">Email: admin@brimob.com | Password: password123</p>
             </div>
         </div>
     </div>

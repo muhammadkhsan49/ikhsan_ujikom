@@ -53,8 +53,8 @@
                         <button type="submit" class="btn btn-primary w-100 mb-3">Daftar</button>
                     </form>
 
-                    <p class="text-center text-muted mb-0">
-                        Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a>
+                    <p class="text-center" style="color: #9ca3af; margin-bottom: 0;">
+                        Sudah punya akun? <a href="{{ route('login') }}" style="color: #fbbf24; text-decoration: none;">Login di sini</a>
                     </p>
                 </div>
             </div>

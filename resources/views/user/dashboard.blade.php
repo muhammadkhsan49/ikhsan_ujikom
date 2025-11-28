@@ -13,11 +13,11 @@
     <div class="row mb-4">
         <div class="col-md-12">
             @if ($activeSchedule)
-                <div class="alert alert-info">
+                <div class="alert" style="background-color: #1e3a8a; border-color: #3b82f6; color: #93c5fd; border-left: 4px solid #3b82f6;">
                     <i class="bi bi-calendar-event"></i>
                     <strong>Pendaftaran Terbuka!</strong> {{ $activeSchedule->title }}
                     <br>
-                    <small class="text-muted">Berlaku hingga {{ $activeSchedule->end_date->format('d F Y H:i') }}</small>
+                    <small style="color: #cbd5e1;">Berlaku hingga {{ $activeSchedule->end_date->format('d F Y H:i') }}</small>
                 </div>
             @endif
         </div>
@@ -25,7 +25,7 @@
 
     <div class="row mb-4">
         <div class="col-md-4">
-            <a href="{{ route('registration.create') }}" class="btn btn-primary btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none; color: white;">
+            <a href="{{ route('registration.create') }}" class="btn btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none; color: #000; background-color: #fbbf24; border: none;">
                 <div class="text-center">
                     <i class="bi bi-pencil-square" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
                     <h5 class="mb-0">Buat Pendaftaran Baru</h5>
@@ -34,20 +34,20 @@
             </a>
         </div>
         <div class="col-md-4">
-            <a href="{{ route('registration.history') }}" class="btn btn-outline-primary btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none;">
+            <a href="{{ route('registration.history') }}" class="btn btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none; color: #fbbf24; background-color: transparent; border: 2px solid #404040;">
                 <div class="text-center">
                     <i class="bi bi-clock-history" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
                     <h5 class="mb-0">Riwayat Pendaftaran</h5>
-                    <small>Lihat semua pendaftaran Anda</small>
+                    <small style="color: #9ca3af;">Lihat semua pendaftaran Anda</small>
                 </div>
             </a>
         </div>
         <div class="col-md-4">
-            <a href="/notifications" class="btn btn-outline-primary btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none;">
+            <a href="/notifications" class="btn btn-lg w-100 h-100" style="padding: 2rem; text-decoration: none; color: #fbbf24; background-color: transparent; border: 2px solid #404040;">
                 <div class="text-center">
                     <i class="bi bi-bell" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
                     <h5 class="mb-0">Notifikasi</h5>
-                    <small>Cek notifikasi terbaru</small>
+                    <small style="color: #9ca3af;">Cek notifikasi terbaru</small>
                 </div>
             </a>
         </div>

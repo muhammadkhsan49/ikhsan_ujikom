@@ -56,10 +56,10 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="text-muted mb-2">Total Pendaftar</h6>
-                                        <h3 class="mb-0">{{ $totalRegistrations }}</h3>
+                                        <h6 style="color: #9ca3af; margin-bottom: 0.5rem;">Total Pendaftar</h6>
+                                        <h3 class="mb-0" style="color: #fbbf24;">{{ $totalRegistrations }}</h3>
                                     </div>
-                                    <i class="bi bi-people" style="font-size: 3rem; opacity: 0.3;"></i>
+                                    <i class="bi bi-people" style="font-size: 3rem; opacity: 0.3; color: #fbbf24;"></i>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="text-muted mb-2">Menunggu Verifikasi</h6>
+                                        <h6 style="color: #9ca3af; margin-bottom: 0.5rem;">Menunggu Verifikasi</h6>
                                         <h3 class="mb-0" style="color: #f59e0b;">{{ $pendingVerification }}</h3>
                                     </div>
                                     <i class="bi bi-clock-history" style="font-size: 3rem; opacity: 0.3; color: #f59e0b;"></i>
@@ -85,10 +85,10 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="text-muted mb-2">Terverifikasi</h6>
-                                        <h3 class="mb-0" style="color: #16a34a;">{{ $verifiedRegistrations }}</h3>
+                                        <h6 style="color: #9ca3af; margin-bottom: 0.5rem;">Terverifikasi</h6>
+                                        <h3 class="mb-0" style="color: #10b981;">{{ $verifiedRegistrations }}</h3>
                                     </div>
-                                    <i class="bi bi-check-circle" style="font-size: 3rem; opacity: 0.3; color: #16a34a;"></i>
+                                    <i class="bi bi-check-circle" style="font-size: 3rem; opacity: 0.3; color: #10b981;"></i>
                                 </div>
                             </div>
                         </div>
@@ -98,10 +98,10 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h6 class="text-muted mb-2">Ditolak</h6>
-                                        <h3 class="mb-0" style="color: #dc2626;">{{ $rejectedRegistrations }}</h3>
+                                        <h6 style="color: #9ca3af; margin-bottom: 0.5rem;">Ditolak</h6>
+                                        <h3 class="mb-0" style="color: #ef4444;">{{ $rejectedRegistrations }}</h3>
                                     </div>
-                                    <i class="bi bi-x-circle" style="font-size: 3rem; opacity: 0.3; color: #dc2626;"></i>
+                                    <i class="bi bi-x-circle" style="font-size: 3rem; opacity: 0.3; color: #ef4444;"></i>
                                 </div>
                             </div>
                         </div>

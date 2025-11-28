@@ -8,36 +8,56 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         :root {
-            --primary: #1e40af;
-            --secondary: #0f766e;
-            --danger: #dc2626;
-            --success: #16a34a;
+            --primary: #fbbf24;
+            --secondary: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --dark-bg: #0f0f0f;
+            --dark-card: #1a1a1a;
+            --dark-border: #404040;
+            --dark-text: #e5e7eb;
         }
         
         body {
-            background-color: #f9fafb;
+            background-color: var(--dark-bg);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
         }
         
         .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid var(--dark-border);
         }
         
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
             letter-spacing: -0.5px;
+            color: white !important;
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+        }
+
+        .nav-link {
+            color: var(--dark-text) !important;
+        }
+
+        .nav-link:hover {
+            color: var(--primary) !important;
         }
         
         .btn-primary {
             background-color: var(--primary);
             border-color: var(--primary);
+            color: #000;
         }
         
         .btn-primary:hover {
-            background-color: #1e3a8a;
-            border-color: #1e3a8a;
+            background-color: var(--secondary);
+            border-color: var(--secondary);
         }
         
         .btn-success {
@@ -51,16 +71,31 @@
         }
         
         .card {
-            border: none;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
+            background-color: var(--dark-card);
+            color: var(--dark-text);
         }
         
         .card-header {
             background-color: var(--primary);
-            color: white;
+            color: #000;
             border-radius: 8px 8px 0 0;
             border: none;
+            font-weight: 600;
+        }
+
+        .card-body {
+            background-color: var(--dark-card);
+        }
+
+        .card-title {
+            color: white;
+        }
+
+        .card-text {
+            color: var(--dark-text);
         }
         
         .badge-status-draft {
@@ -69,6 +104,7 @@
         
         .badge-status-submitted {
             background-color: #f59e0b;
+            color: #000;
         }
         
         .badge-status-verified {
@@ -80,9 +116,10 @@
         }
         
         .sidebar {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background: var(--dark-card);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             min-height: 100vh;
+            border-right: 1px solid var(--dark-border);
         }
         
         .sidebar-menu {
@@ -95,7 +132,7 @@
         }
         
         .sidebar-menu a {
-            color: #374151;
+            color: var(--dark-text);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
             display: block;
@@ -106,17 +143,87 @@
         .sidebar-menu a:hover,
         .sidebar-menu a.active {
             color: var(--primary);
-            background-color: #f3f4f6;
+            background-color: #262626;
             border-left-color: var(--primary);
         }
         
         .main-content {
-            background-color: #f9fafb;
+            background-color: var(--dark-bg);
             padding: 2rem;
         }
         
         .alert-dismissible .btn-close {
             padding: 0.5rem;
+        }
+
+        .alert-danger {
+            background-color: #7f1d1d;
+            border-color: #991b1b;
+            color: #fee2e2;
+        }
+
+        .alert-success {
+            background-color: #064e3b;
+            border-color: #065f46;
+            color: #d1fae5;
+        }
+
+        .table {
+            color: var(--dark-text);
+            border-color: var(--dark-border);
+        }
+
+        .table-dark {
+            background-color: var(--dark-card);
+            border-color: var(--dark-border);
+        }
+
+        .table thead {
+            border-color: var(--dark-border);
+        }
+
+        .table thead th {
+            background-color: #262626;
+            color: var(--primary);
+            border-color: var(--dark-border);
+        }
+
+        .table tbody tr {
+            border-color: var(--dark-border);
+        }
+
+        .table tbody tr:hover {
+            background-color: #1f2937;
+        }
+
+        .form-control, .form-select {
+            background-color: #262626;
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #262626;
+            border-color: var(--primary);
+            color: var(--dark-text);
+            box-shadow: 0 0 0 0.2rem rgba(251, 191, 36, 0.25);
+        }
+
+        .form-label {
+            color: var(--dark-text);
+        }
+        
+        footer {
+            background-color: #000000 !important;
+            border-top: 1px solid var(--dark-border) !important;
+        }
+
+        footer a {
+            color: var(--primary);
+        }
+
+        footer a:hover {
+            color: var(--secondary);
         }
         
         @media (max-width: 768px) {
