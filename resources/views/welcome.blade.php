@@ -101,14 +101,58 @@
                 align-items: center;
                 justify-content: center;
                 min-height: calc(100vh - 70px);
-                background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
+                background-image: url('{{ asset("image/aas.jpeg") }}');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                position: relative;
+            }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .hero-logo {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                z-index: 3;
+                max-width: 120px;
+                animation: fadeIn 0.8s ease-in;
+            }
+
+            .hero-logo img {
+                max-width: 100%;
+                height: auto;
+                filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
             }
 
             .hero-content h1 {
                 font-size: 3.5rem;
                 font-weight: 700;
                 margin-bottom: 1rem;
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+                text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
                 line-height: 1.2;
                 color: var(--white);
             }
@@ -116,8 +160,8 @@
             .hero-content p {
                 font-size: 1.3rem;
                 margin-bottom: 2rem;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-                color: #d1d5db;
+                text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+                color: var(--white);
             }
 
             .hero-buttons {
@@ -303,6 +347,12 @@
 
             /* Responsive */
             @media (max-width: 768px) {
+                .hero-logo {
+                    top: 20px;
+                    right: 20px;
+                    max-width: 80px;
+                }
+
                 .hero-content h1 {
                     font-size: 2.2rem;
                 }
@@ -368,6 +418,9 @@
 
         <!-- Hero Section -->
         <section class="hero-section">
+            <div class="hero-logo">
+                <img src="{{ asset('image/aas2).png') }}" alt="Brimob Logo">
+            </div>
             <div class="container">
                 <div class="hero-content">
                     <h1>Sistem Pendaftaran Calon Anggota Brimob</h1>
