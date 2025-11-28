@@ -42,47 +42,82 @@ Aplikasi web modern untuk mengelola pendaftaran calon anggota Brigade Mobil (Bri
 ### Entity Relationship Diagram (ERD)
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│                           USERS                                │
-│                      (id, name, email)                         │
-│                                                                 │
-│            1 ──────────────── ∞                                │
-│            │                  │                                 │
-│            │ has_many         │                                 │
-│            │                  │                                 │
-│         ┌─────────────────────────────────────┐                │
-│         │                                     │                │
-│         │                                     │                │
-│      REGISTRATIONS ─────────── has_many ─── DOCUMENTS         │
-│      (id, user_id, status)        │          (id, registration_id)
-│         │                          │                            │
-│         │                          ▼                            │
-│         │                    (document_type,                    │
-│         │                     file_path)                        │
-│         │                                                       │
-│         └──────────────────────────────────────┐               │
-│                                                │                │
-│                                                ▼                │
-│                                    NOTIFICATIONS              │
-│                                  (id, user_id,               │
-│                                   registration_id)           │
-│                                                               │
-│                                                               │
-│                    SELECTION_SCHEDULES                        │
-│                   (id, title, stage, date)                   │
-│                   (Independent - untuk jadwal)               │
-│                                                               │
-└─────────────────────────────────────────────────────────────────┘
+                          ┌─────────────────┐
+                          │     USERS       │
+                          ├─────────────────┤
+                          │ id (PK)         │
+                          │ name            │
+                          │ email (UNIQUE)  │
+                          │ password        │
+                          │ role (ENUM)     │
+                          │ created_at      │
+                          │ updated_at      │
+                          └────────┬────────┘
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+                    │ 1:∞          │ 1:∞          │ 1:∞
+                    ▼              ▼              ▼
+        ┌─────────────────────┐  ┌──────────────────────┐  ┌──────────────────┐
+        │  REGISTRATIONS      │  │  NOTIFICATIONS       │  │ (jika ada relasi │
+        ├─────────────────────┤  ├──────────────────────┤  │  dengan schedule)│
+        │ id (PK)             │  │ id (PK)              │  │                  │
+        │ user_id (FK)   ─────┼──┤ user_id (FK)    ─────┼──│ 1:∞ USERS        │
+        │ registration_number │  │ registration_id (FK) │  │                  │
+        │ status (ENUM)       │  │ title                │  │ SELECTION_       │
+        │ full_name           │  │ message              │  │ SCHEDULES        │
+        │ nik (UNIQUE)        │  │ type                 │  ├──────────────────┤
+        │ email               │  │ is_read              │  │ id (PK)          │
+        │ phone_number        │  │ read_at              │  │ title            │
+        │ gender              │  │ created_at           │  │ stage (ENUM)     │
+        │ date_of_birth       │  │ updated_at           │  │ start_date       │
+        │ place_of_birth      │  └──────────────────────┘  │ end_date         │
+        │ street_address      │                             │ location         │
+        │ village             │                             │ quota            │
+        │ district            │                             │ description      │
+        │ regency             │                             │ created_at       │
+        │ province            │                             │ updated_at       │
+        │ postal_code         │                             └──────────────────┘
+        │ education_level     │
+        │ school_name         │
+        │ major               │
+        │ graduation_year     │
+        │ height              │
+        │ weight              │
+        │ emergency_contact_* │
+        │ verified_by         │
+        │ verified_at         │
+        │ verification_notes  │
+        │ rejection_reason    │
+        │ created_at          │
+        │ updated_at          │
+        └────────┬────────────┘
+                 │
+                 │ 1:∞
+                 ▼
+        ┌─────────────────────┐
+        │    DOCUMENTS        │
+        ├─────────────────────┤
+        │ id (PK)             │
+        │ registration_id (FK)│
+        │ document_type       │
+        │ file_path           │
+        │ original_filename   │
+        │ created_at          │
+        │ updated_at          │
+        └─────────────────────┘
 ```
 
-### Relasi Tabel
+### Penjelasan Relasi
 
-- **users** (1) → (∞) **registrations** - One user dapat memiliki banyak registrations
-- **registrations** (1) → (∞) **documents** - One registration dapat memiliki banyak dokumen
-- **users** (1) → (∞) **notifications** - One user dapat menerima banyak notifikasi
-- **registrations** (1) → (∞) **notifications** - One registration dapat memicu banyak notifikasi
-- **selection_schedules** - Tabel independen untuk jadwal tahapan seleksi
+| Relasi | From | To | Keterangan |
+|--------|------|-----|-----------|
+| **1:∞** | users | registrations | 1 pengguna bisa punya banyak pendaftaran |
+| **1:∞** | users | notifications | 1 pengguna bisa punya banyak notifikasi |
+| **1:∞** | registrations | documents | 1 pendaftaran bisa punya banyak dokumen |
+| **1:∞** | registrations | notifications | 1 pendaftaran bisa trigger banyak notifikasi |
+| **∞:1** | notifications | users | Banyak notifikasi untuk 1 pengguna |
+| **Independent** | selection_schedules | - | Tabel independen untuk jadwal tahapan seleksi |
 
 ### Tabel & Kolom Lengkap
 
