@@ -1,1 +1,295 @@
-aas
+# Sistem Pendaftaran Calon Anggota Brimob
+
+Aplikasi web modern untuk mengelola pendaftaran calon anggota Brigade Mobil (Brimob) Polri dengan fitur verifikasi, penjadwalan seleksi, dan sistem notifikasi real-time.
+
+## 🎯 Fitur Utama
+
+### Untuk Calon Peserta (User)
+- ✅ Registrasi akun dengan email dan password
+- ✅ Formulir pendaftaran multi-section yang lengkap:
+  - Data Pribadi (nama, NIK, tempat/tanggal lahir)
+  - Alamat Tinggal & Asal
+  - Riwayat Pendidikan
+  - Data Kesehatan & Fisik
+  - Kontak Darurat
+  - Upload Dokumen (KTP, Ijazah, Foto, Surat Kesehatan, dll)
+- ✅ Riwayat pendaftaran dengan status tracking
+- ✅ Unduh/Cetak sertifikat dalam format PDF
+- ✅ Sistem notifikasi untuk update status
+- ✅ Dashboard dengan statistik pendaftaran
+- ✅ Dark theme dengan interface modern
+
+### Untuk Admin
+- ✅ Dashboard dengan statistik real-time
+- ✅ Verifikasi pendaftaran (Terima/Tolak)
+- ✅ Manajemen jadwal seleksi (6 tahap: Registrasi, Tes Kesehatan, Fisik, Psikologi, Wawancara, Hasil Akhir)
+- ✅ Sistem notifikasi untuk peserta
+- ✅ Export data ke Excel & PDF
+- ✅ Riwayat notifikasi lengkap
+- ✅ Sidebar navigasi yang user-friendly
+
+## 🛠️ Stack Teknologi
+
+- **Backend**: Laravel 11 (PHP Framework)
+- **Database**: MySQL 8.0+
+- **Frontend**: Bootstrap 5.3, Blade Template Engine
+- **Export**: DomPDF (PDF), Laravel Excel (Excel)
+- **Server**: Apache (XAMPP)
+- **Authentication**: Laravel Built-in Auth dengan Role-based Access Control
+
+## 📋 Sistem Database
+
+### Tabel Utama
+1. **users** - Data pengguna dengan role (user/admin)
+2. **registrations** - Data pendaftaran dengan status tracking
+3. **documents** - File dokumen pendukung
+4. **selection_schedules** - Jadwal tahapan seleksi
+5. **notifications** - Notifikasi untuk pengguna
+6. **cache** & **jobs** - Cache dan job queue
+
+## 🚀 Instalasi
+
+### Prerequisites
+- PHP 8.2+
+- MySQL 8.0+
+- Composer
+- XAMPP atau Web Server lainnya
+- Git
+
+### Langkah Instalasi
+
+#### 1. Clone Repository
+```bash
+git clone https://github.com/muhammadkhsan49/ikhsan_ujikom.git
+cd pendaftaran_brimob
+```
+
+#### 2. Install Dependencies
+```bash
+composer install
+```
+
+#### 3. Setup File Environment
+```bash
+cp .env.example .env
+```
+
+Kemudian edit `.env` dan sesuaikan konfigurasi database:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=brimob
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+#### 4. Generate Application Key
+```bash
+php artisan key:generate
+```
+
+#### 5. Buat Database
+Buat database MySQL dengan nama `brimob`:
+```bash
+mysql -u root -p
+CREATE DATABASE brimob;
+EXIT;
+```
+
+#### 6. Jalankan Migration & Seeding
+```bash
+php artisan migrate --seed
+```
+
+Ini akan membuat semua tabel dan mengisi data demo.
+
+#### 7. Link Storage (untuk upload dokumen)
+```bash
+php artisan storage:link
+```
+
+#### 8. Jalankan Server
+```bash
+php artisan serve
+```
+
+Server akan berjalan di `http://localhost:8000`
+
+## 📱 Cara Penggunaan
+
+### Login Demo
+
+#### Akun Admin
+```
+Email: admin@brimob.com
+Password: password123
+```
+
+#### Akun User
+```
+Email: john@example.com
+Password: password123
+
+Email: jane@example.com
+Password: password123
+```
+
+### Navigasi User (Peserta)
+1. **Dashboard** - Lihat status pendaftaran dan tombol aksi
+2. **Buat Pendaftaran Baru** - Isi formulir pendaftaran lengkap
+3. **Riwayat Pendaftaran** - Lihat semua pendaftaran dan statusnya
+4. **Notifikasi** - Terima update status dari admin
+5. **Cetak Sertifikat** - Download sertifikat PDF setelah terverifikasi
+
+### Navigasi Admin
+1. **Dashboard** - Lihat statistik (Total, Pending, Verified, Rejected)
+2. **Verifikasi Pendaftar** - Review dan approve/reject aplikasi
+3. **Jadwal Seleksi** - Kelola 6 tahapan seleksi
+4. **Notifikasi** - Kirim notifikasi ke peserta
+5. **Export** - Download data dalam format Excel atau PDF
+
+## 🎨 Tema Design
+
+Aplikasi menggunakan **Dark Theme Modern** dengan palet warna:
+- **Primary**: #000000 (Hitam)
+- **Accent**: #fbbf24 (Gold/Kuning)
+- **Success**: #10b981 (Hijau)
+- **Danger**: #ef4444 (Merah)
+
+Interface responsif dan optimal di desktop, tablet, dan mobile.
+
+## 📁 Struktur Direktori
+
+```
+pendaftaran_brimob/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/          # Kontroller aplikasi
+│   │   └── Middleware/           # Custom middleware
+│   ├── Models/                    # Eloquent Models
+│   ├── Policies/                  # Authorization Policies
+│   └── Exports/                   # Excel Export Classes
+├── database/
+│   ├── migrations/                # Skema database
+│   ├── factories/                 # Model factories
+│   └── seeders/                   # Database seeders
+├── resources/
+│   ├── views/                     # Blade templates
+│   │   ├── auth/                  # Login/Register
+│   │   ├── admin/                 # Admin panel
+│   │   ├── user/                  # User dashboard
+│   │   └── layouts/               # Layout templates
+│   ├── css/                       # CSS files
+│   └── js/                        # JavaScript files
+├── routes/
+│   └── web.php                    # Route definitions
+├── config/                        # Konfigurasi aplikasi
+├── storage/                       # File uploads & logs
+└── public/                        # Aset publik
+```
+
+## 🔧 Konfigurasi Penting
+
+### File `.env`
+```env
+APP_NAME="Pendaftaran Brimob"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=brimob
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+MAIL_FROM_ADDRESS=noreply@brimob.go.id
+MAIL_FROM_NAME="Pendaftaran Brimob"
+```
+
+## 🚨 Troubleshooting
+
+### Database Connection Error
+```bash
+# Pastikan MySQL sudah running
+# Di XAMPP, klik start pada MySQL
+
+# Cek konfigurasi .env
+# Cek credentials database di .env
+```
+
+### Permission Denied pada Storage
+```bash
+# Berikan permission ke folder storage
+chmod -R 775 storage/
+chmod -R 775 bootstrap/cache/
+```
+
+### Composer Dependencies Error
+```bash
+# Clear composer cache
+composer clear-cache
+
+# Re-install dependencies
+composer install
+```
+
+### Page Blank/Error 500
+```bash
+# Check logs
+tail -f storage/logs/laravel.log
+
+# Clear cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+```
+
+## 📊 Routes & Endpoints
+
+### Public Routes
+- `GET /` - Landing page
+- `POST /register` - Register user baru
+- `POST /login` - Login user
+
+### User Routes (Protected)
+- `GET /dashboard` - User dashboard
+- `GET /registration/create` - Form pendaftaran
+- `POST /registration` - Submit pendaftaran
+- `GET /registration/history` - Riwayat pendaftaran
+- `GET /registration/{id}` - Detail pendaftaran
+- `GET /registration/{id}/pdf` - Download sertifikat PDF
+- `GET /notifications` - Notifikasi user
+
+### Admin Routes (Protected)
+- `GET /admin` - Admin dashboard
+- `GET /admin/verification` - List pendaftaran untuk verifikasi
+- `GET /admin/verification/{id}` - Detail pendaftaran
+- `POST /admin/verification/{id}/verify` - Approve pendaftaran
+- `POST /admin/verification/{id}/reject` - Reject pendaftaran
+- `GET /admin/schedules` - Jadwal seleksi
+- `POST /admin/schedules` - Buat jadwal baru
+- `GET /admin/notifications` - Riwayat notifikasi
+- `GET /admin/export/excel` - Export Excel
+- `GET /admin/export/pdf` - Export PDF
+
+## 📝 License
+
+Copyright © 2025 Sistem Pendaftaran Brimob. All rights reserved.
+
+## 👨‍💻 Developer
+
+Dikembangkan untuk kebutuhan pendaftaran calon anggota Brigade Mobil (Brimob) Polri.
+
+Untuk informasi lebih lanjut atau pertanyaan, hubungi admin@brimob.go.id
+
+---
+
+**Last Updated**: November 2025
