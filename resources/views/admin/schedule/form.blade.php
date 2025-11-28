@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', (isset($schedule) ? 'Edit' : 'Buat') . ' Jadwal Seleksi')
+@section('title', (isset($schedule) && $schedule ? 'Edit' : 'Buat') . ' Jadwal Seleksi')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h2 class="mb-4">
-                {{ isset($schedule) ? 'Edit Jadwal Seleksi' : 'Buat Jadwal Seleksi Baru' }}
+                {{ isset($schedule) && $schedule ? 'Edit Jadwal Seleksi' : 'Buat Jadwal Seleksi Baru' }}
             </h2>
 
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ isset($schedule) ? route('admin.schedules.update', $schedule) : route('admin.schedules.store') }}" 
+                    <form action="{{ isset($schedule) && $schedule ? route('admin.schedules.update', $schedule) : route('admin.schedules.store') }}" 
                           method="POST">
                         @csrf
-                        @if (isset($schedule))
+                        @if (isset($schedule) && $schedule)
                             @method('PUT')
                         @endif
 
@@ -77,7 +77,7 @@
 
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle"></i> {{ isset($schedule) ? 'Perbarui' : 'Buat' }}
+                                <i class="bi bi-check-circle"></i> {{ isset($schedule) && $schedule ? 'Perbarui' : 'Buat' }}
                             </button>
                             <a href="/admin/schedules" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left"></i> Kembali

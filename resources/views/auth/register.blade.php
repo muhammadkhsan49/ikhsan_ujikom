@@ -5,8 +5,7 @@
 @section('styles')
 <style>
     body {
-        background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 100%) !important;
-        min-height: 100vh;
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
     }
 </style>
 @endsection

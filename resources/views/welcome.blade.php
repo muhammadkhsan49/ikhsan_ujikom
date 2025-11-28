@@ -13,12 +13,13 @@
 
         <style>
             :root {
-                --primary-color: #000000;
-                --secondary-color: #1a1a1a;
-                --accent-color: #404040;
-                --success-color: #10b981;
-                --danger-color: #ef4444;
-                --text-light: #e5e7eb;
+                --primary: #fbbf24;
+                --secondary: #f59e0b;
+                --black: #000000;
+                --white: #ffffff;
+                --danger: #ef4444;
+                --success: #22c55e;
+                --gray: #f3f4f6;
             }
 
             * {
@@ -28,22 +29,22 @@
             }
 
             body {
-                background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+                background: linear-gradient(135deg, var(--white) 0%, var(--gray) 100%);
                 min-height: 100vh;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                color: var(--text-light);
+                color: var(--black);
             }
 
             /* Navbar */
             .navbar {
-                background-color: rgba(26, 26, 26, 0.98) !important;
-                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
-                border-bottom: 1px solid #404040;
+                background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%) !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                border-bottom: 3px solid var(--primary);
             }
 
             .navbar-brand {
                 font-weight: 700;
-                color: #ffffff !important;
+                color: var(--white) !important;
                 font-size: 1.5rem;
                 display: flex;
                 align-items: center;
@@ -52,7 +53,7 @@
 
             .navbar-brand i {
                 font-size: 2rem;
-                color: #fbbf24;
+                color: var(--primary);
             }
 
             .navbar-nav .nav-link {
@@ -63,44 +64,44 @@
             }
 
             .navbar-nav .nav-link:hover {
-                color: #fbbf24 !important;
+                color: var(--primary) !important;
             }
 
             .btn-login {
-                color: #fbbf24;
-                border: 2px solid #fbbf24;
+                color: var(--primary);
+                border: 2px solid var(--primary);
                 font-weight: 600;
                 margin-left: 10px;
                 transition: all 0.3s ease;
             }
 
             .btn-login:hover {
-                background-color: #fbbf24;
-                color: #000;
+                background-color: var(--primary);
+                color: var(--black);
             }
 
             .btn-register {
-                background-color: #fbbf24;
-                color: #000;
+                background-color: var(--primary);
+                color: var(--black);
                 font-weight: 600;
                 margin-left: 10px;
                 transition: all 0.3s ease;
             }
 
             .btn-register:hover {
-                background-color: #f59e0b;
+                background-color: var(--secondary);
             }
 
             /* Hero Section */
             .hero-section {
                 padding: 100px 0;
-                color: white;
+                color: var(--white);
                 text-align: center;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 min-height: calc(100vh - 70px);
-                background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+                background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 50%, var(--black) 100%);
             }
 
             .hero-content h1 {
@@ -109,7 +110,7 @@
                 margin-bottom: 1rem;
                 text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
                 line-height: 1.2;
-                color: #ffffff;
+                color: var(--white);
             }
 
             .hero-content p {
@@ -133,35 +134,35 @@
             }
 
             .btn-hero-white {
-                background-color: #fbbf24;
-                color: #000;
-                border: 2px solid #fbbf24;
+                background-color: var(--primary);
+                color: var(--black);
+                border: 2px solid var(--primary);
             }
 
             .btn-hero-white:hover {
                 background-color: transparent;
-                color: #fbbf24;
+                color: var(--primary);
                 transform: translateY(-2px);
                 box-shadow: 0 5px 15px rgba(251, 191, 36, 0.3);
             }
 
             .btn-hero-outline {
                 background-color: transparent;
-                color: #fbbf24;
-                border: 2px solid #fbbf24;
+                color: var(--primary);
+                border: 2px solid var(--primary);
             }
 
             .btn-hero-outline:hover {
-                background-color: #fbbf24;
-                color: #000;
+                background-color: var(--primary);
+                color: var(--black);
                 transform: translateY(-2px);
             }
 
             /* Features Section */
             .features-section {
                 padding: 80px 0;
-                background-color: #0f0f0f;
-                border-top: 1px solid #404040;
+                background-color: var(--white);
+                border-top: 2px solid var(--black);
             }
 
             .section-title {
@@ -172,13 +173,13 @@
             .section-title h2 {
                 font-size: 2.5rem;
                 font-weight: 700;
-                color: #fbbf24;
+                color: var(--black);
                 margin-bottom: 15px;
             }
 
             .section-title p {
                 font-size: 1.1rem;
-                color: #9ca3af;
+                color: #6b7280;
             }
 
             .feature-card {
@@ -186,33 +187,33 @@
                 padding: 40px 30px;
                 border-radius: 10px;
                 transition: all 0.3s ease;
-                border: 1px solid #404040;
+                border: 2px solid var(--black);
                 height: 100%;
-                background-color: #1a1a1a;
+                background-color: var(--white);
             }
 
             .feature-card:hover {
                 transform: translateY(-10px);
-                box-shadow: 0 15px 35px rgba(251, 191, 36, 0.1);
-                border-color: #fbbf24;
-                background-color: #262626;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                border-color: var(--primary);
+                background-color: var(--gray);
             }
 
             .feature-icon {
                 font-size: 3rem;
-                color: #fbbf24;
+                color: var(--primary);
                 margin-bottom: 20px;
             }
 
             .feature-card h5 {
-                color: #fbbf24;
+                color: var(--black);
                 font-weight: 600;
                 margin-bottom: 15px;
                 font-size: 1.3rem;
             }
 
             .feature-card p {
-                color: #d1d5db;
+                color: #4b5563;
                 line-height: 1.6;
                 font-size: 0.95rem;
             }
@@ -220,8 +221,8 @@
             /* Stats Section */
             .stats-section {
                 padding: 80px 0;
-                background-color: #1a1a1a;
-                border-top: 1px solid #404040;
+                background-color: var(--gray);
+                border-top: 2px solid var(--black);
             }
 
             .stat-item {
@@ -232,11 +233,11 @@
             .stat-number {
                 font-size: 2.8rem;
                 font-weight: 700;
-                color: #fbbf24;
+                color: var(--primary);
             }
 
             .stat-label {
-                color: #9ca3af;
+                color: #6b7280;
                 font-size: 1.1rem;
                 margin-top: 10px;
             }
@@ -244,17 +245,17 @@
             /* CTA Section */
             .cta-section {
                 padding: 80px 0;
-                background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-                color: white;
+                background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 100%);
+                color: var(--white);
                 text-align: center;
-                border-top: 1px solid #404040;
+                border-top: 2px solid var(--primary);
             }
 
             .cta-section h2 {
                 font-size: 2.5rem;
                 font-weight: 700;
                 margin-bottom: 1rem;
-                color: #fbbf24;
+                color: var(--primary);
             }
 
             .cta-section p {
@@ -265,12 +266,12 @@
 
             /* Footer */
             .footer {
-                background-color: #000000;
+                background-color: var(--black);
                 color: #9ca3af;
                 padding: 40px 0 20px;
                 text-align: center;
                 margin-top: 80px;
-                border-top: 1px solid #404040;
+                border-top: 3px solid var(--primary);
             }
 
             .footer p {
@@ -283,18 +284,18 @@
             }
 
             .footer-links a {
-                color: #9ca3af;
+                color: var(--primary);
                 margin: 0 15px;
                 text-decoration: none;
                 transition: color 0.3s ease;
             }
 
             .footer-links a:hover {
-                color: #fbbf24;
+                color: var(--secondary);
             }
 
             .footer-bottom {
-                border-top: 1px solid #404040;
+                border-top: 1px solid #333;
                 padding-top: 20px;
                 margin-top: 20px;
                 color: #6b7280;
@@ -327,7 +328,7 @@
     </head>
     <body>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <i class="bi bi-shield-check"></i>
