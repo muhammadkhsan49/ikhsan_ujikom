@@ -39,13 +39,176 @@ Aplikasi web modern untuk mengelola pendaftaran calon anggota Brigade Mobil (Bri
 
 ## 📋 Sistem Database
 
-### Tabel Utama
-1. **users** - Data pengguna dengan role (user/admin)
-2. **registrations** - Data pendaftaran dengan status tracking
-3. **documents** - File dokumen pendukung
-4. **selection_schedules** - Jadwal tahapan seleksi
-5. **notifications** - Notifikasi untuk pengguna
-6. **cache** & **jobs** - Cache dan job queue
+### Entity Relationship Diagram (ERD)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│                           USERS                                │
+│                      (id, name, email)                         │
+│                                                                 │
+│            1 ──────────────── ∞                                │
+│            │                  │                                 │
+│            │ has_many         │                                 │
+│            │                  │                                 │
+│         ┌─────────────────────────────────────┐                │
+│         │                                     │                │
+│         │                                     │                │
+│      REGISTRATIONS ─────────── has_many ─── DOCUMENTS         │
+│      (id, user_id, status)        │          (id, registration_id)
+│         │                          │                            │
+│         │                          ▼                            │
+│         │                    (document_type,                    │
+│         │                     file_path)                        │
+│         │                                                       │
+│         └──────────────────────────────────────┐               │
+│                                                │                │
+│                                                ▼                │
+│                                    NOTIFICATIONS              │
+│                                  (id, user_id,               │
+│                                   registration_id)           │
+│                                                               │
+│                                                               │
+│                    SELECTION_SCHEDULES                        │
+│                   (id, title, stage, date)                   │
+│                   (Independent - untuk jadwal)               │
+│                                                               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Relasi Tabel
+
+- **users** (1) → (∞) **registrations** - One user dapat memiliki banyak registrations
+- **registrations** (1) → (∞) **documents** - One registration dapat memiliki banyak dokumen
+- **users** (1) → (∞) **notifications** - One user dapat menerima banyak notifikasi
+- **registrations** (1) → (∞) **notifications** - One registration dapat memicu banyak notifikasi
+- **selection_schedules** - Tabel independen untuk jadwal tahapan seleksi
+
+### Tabel & Kolom Lengkap
+
+#### 1. **users**
+```
+id (PK)                    - INT, Primary Key
+name                       - VARCHAR(255)
+email (UNIQUE)             - VARCHAR(255), Unique
+email_verified_at          - TIMESTAMP, Nullable
+password                   - VARCHAR(255)
+role (ENUM)                - ENUM('user', 'admin'), Default: 'user'
+remember_token             - VARCHAR(100), Nullable
+created_at                 - TIMESTAMP
+updated_at                 - TIMESTAMP
+```
+
+#### 2. **registrations**
+```
+id (PK)                    - BIGINT, Primary Key
+user_id (FK)               - BIGINT, Foreign Key → users.id
+registration_number        - VARCHAR(255), Unique
+status (ENUM)              - ENUM('draft', 'submitted', 'verified', 'rejected')
+
+─── DATA DIRI ───
+full_name                  - VARCHAR(255)
+gender                     - VARCHAR(20)
+date_of_birth              - DATE
+place_of_birth             - VARCHAR(255)
+nik                        - VARCHAR(255), Unique
+phone_number               - VARCHAR(20)
+email                      - VARCHAR(255)
+
+─── ALAMAT ───
+street_address             - TEXT
+village                    - VARCHAR(255)
+district                   - VARCHAR(255)
+regency                    - VARCHAR(255)
+province                   - VARCHAR(255)
+postal_code                - VARCHAR(10)
+
+─── PENDIDIKAN ───
+education_level            - VARCHAR(100)
+school_name                - VARCHAR(255)
+major                      - VARCHAR(255), Nullable
+graduation_year            - YEAR
+
+─── FISIK ───
+height                     - DECIMAL(5,2), cm
+weight                     - DECIMAL(5,2), kg
+
+─── KONTAK DARURAT ───
+emergency_contact_name     - VARCHAR(255)
+emergency_contact_relationship - VARCHAR(100)
+emergency_contact_phone    - VARCHAR(20)
+
+─── VERIFIKASI ───
+verified_by                - VARCHAR(255), Nullable
+verified_at                - TIMESTAMP, Nullable
+verification_notes         - TEXT, Nullable
+rejection_reason           - TEXT, Nullable
+
+created_at                 - TIMESTAMP
+updated_at                 - TIMESTAMP
+```
+
+#### 3. **documents**
+```
+id (PK)                    - BIGINT, Primary Key
+registration_id (FK)       - BIGINT, Foreign Key → registrations.id
+document_type (ENUM)       - ENUM('ktp', 'ijazah', 'foto_formal', 'surat_kesehatan')
+file_path                  - VARCHAR(255)
+original_filename          - VARCHAR(255)
+created_at                 - TIMESTAMP
+updated_at                 - TIMESTAMP
+```
+
+#### 4. **selection_schedules**
+```
+id (PK)                    - BIGINT, Primary Key
+title                      - VARCHAR(255)
+description                - TEXT, Nullable
+start_date                 - DATETIME
+end_date                   - DATETIME
+stage (ENUM)               - ENUM('registrasi', 'tes_kesehatan', 'tes_fisik', 
+                             'tes_psikologi', 'wawancara', 'hasil_akhir')
+location                   - TEXT, Nullable
+quota                      - INT, Nullable
+created_at                 - TIMESTAMP
+updated_at                 - TIMESTAMP
+```
+
+#### 5. **notifications**
+```
+id (PK)                    - BIGINT, Primary Key
+user_id (FK)               - BIGINT, Foreign Key → users.id
+registration_id (FK)       - BIGINT, Foreign Key → registrations.id, Nullable
+title                      - VARCHAR(255)
+message                    - TEXT
+type                       - VARCHAR(100), Default: 'info' (info/warning/success/error)
+is_read                    - BOOLEAN, Default: false
+read_at                    - TIMESTAMP, Nullable
+created_at                 - TIMESTAMP
+updated_at                 - TIMESTAMP
+```
+
+#### 6. **password_reset_tokens** (Sistem)
+```
+email (PK)                 - VARCHAR(255)
+token                      - VARCHAR(255)
+created_at                 - TIMESTAMP, Nullable
+```
+
+#### 7. **sessions** (Sistem)
+```
+id (PK)                    - VARCHAR(255)
+user_id (FK)               - BIGINT, Nullable
+ip_address                 - VARCHAR(45), Nullable
+user_agent                 - TEXT, Nullable
+payload                    - LONGTEXT
+last_activity              - INT
+```
+
+### Constraints & Relationships
+- **Cascade Delete**: Ketika user/registration dihapus, semua related records (registrations, documents, notifications) otomatis terhapus
+- **Unique Constraints**: `users.email`, `registrations.nik`, `registrations.registration_number`
+- **Foreign Key Constraints**: Semua FK memiliki `ON DELETE CASCADE`
 
 ## 🚀 Instalasi
 
